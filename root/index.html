@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Web Edior Ideas Sketch</title>
+
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" media="screen">
+	<link rel="stylesheet" href="lib/font_awesome/css/font-awesome.css" media="screen">
+	<link rel="stylesheet" href="lib/aloha/css/aloha.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/index.css" type="text/css" media="screen">
+
+	<!-- Load libs. Actual "main code" start at the bottom of the page. -->
+	<script src="lib/aloha/lib/require.js"></script>
+	<script src="lib/aloha/lib/vendor/jquery-1.7.2.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="lib/pouchdb/pouch.alpha.js"></script>
+	<script src="lib/aloha/lib/aloha.js"></script>
+	<script src="lib/jquery.fullscreen.js"></script>
+
+</head>
+<body>
+	<div class="page">
+		<div class="navbar navbar-fixed-static-top">
+		  <div class="navbar-inner">
+		    <a class="brand" href="#">Web Edit</a>
+		    <ul class="nav">
+		      <li class="active"><a href="#">Write</a></li>
+		      <li><a href="#">To Do</a></li>
+		      <li><a href="#">Stats</a></li>
+		      <li class="divider-vertical"></li>
+		      <li class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile  <b class="caret"></b></a>
+				    <ul class="dropdown-menu">
+				    	<li class="active"><a href="#">Author</a></li>
+				      <li><a href="#">Site Manager</a></li>
+				      <li><a href="#">Admin</a></li>
+				      <li><a href="#">Preferences</a></li>
+				    </ul>
+				  </li>		      
+		    </ul>
+		    <!-- View-local options. These option change depending upon the current profile. -->
+		  	<div id="menu" class="menu">
+					<div class="btn-group">
+					<button id="action_save" class="btn"><span id="save_text" class="muted"><i class="icon-ok"> </i> Save</span></button>
+					<button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+					  <ul class="dropdown-menu">
+					    <!-- dropdown menu links -->
+			 		    <li><a id="action_save_new" href="#"><i class="icon-file"> </i>Save as new</a></li>
+			 		    <li><a id="action_new" href="#"><i class="icon-file"> </i>New</a></li>
+					    <li><a id="action_open" data-toggle="modal" data-target="#file_modal" href="#"><i class="icon-folder-open"> </i>Open</a></li>
+			 				<li><a id="action_sync" href="#"><i class="icon-upload">&nbsp;&nbsp;</i>Sync to server</a></li>
+			 				<li><a id="action_clearDB" href="#"><i class="icon-trash">&nbsp;&nbsp;</i>Clear local content</a></li>
+					  </ul>
+					</div>
+					<button id="action_fullscreen" class="btn"><i class="icon-fullscreen"></i></button>
+				</div>
+		  </div> 
+		</div><!-- END MENUS AND NAVIGATION -->
+
+		<!-- MAIN CONTENT AREA STARTS HERE (2 cols) -->
+		<div class="container-fluid">
+			<div class="row-fluid">
+			    <div class="span3">
+			    <!--Sidebar content-->
+				    	<div id="drop_target" class="media_tray muted">Drag and drop media here</div>
+				    	<div id="file_list" class="media_tray muted"></div>		
+			    </div>
+			    <div class="span9">
+			     	<!-- Content Editor -->
+			     	<div id="main_editor">
+							<h1 class="muted input_field" id="content_title">Add text here</h1>
+							<div class="lead muted input_field" id="content_lead">Add text here</div>
+							<div class="muted input_field"  id="content_body">Add text here</div>
+						</div>
+			    </div>
+	  		</div>
+		</div>
+	</div><!-- END PAGE -->
+
+	<!-- Modal dialog for "Open File". Hidden by Bootstrap. -->
+	<div id="file_modal" class="modal hide fade" tabindex="-1" role="dialog" 
+			 aria-labelledby="file_modalLabel" aria-hidden="true">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="file_modalLabel">Chose content to edit</h3>
+	  </div>
+	  <div class="modal-body">
+	    <p><b>Unsubmitted content (local)</b></p>
+	    <ul id="db_list" class="unstyled"></ul>
+
+	    <p>[Maybe search the server for content goes here…]</p>
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	    <button class="btn btn-primary" data-dismiss="modal" onclick="loadLocal()">Open</button>
+	  </div>
+	</div>
+
+	<!-- APPLICATION SCRIPTS BELOW-->
+	<script type="text/javascript">
+		var loadLocal = null; // defined here to "export" the definition to the page (too be fixed)
+	</script>
+	<script type="text/javascript" src="js/persistence.js"></script>
+	<script type="text/javascript" src="js/image-drag-drop.js"></script>
+	<script type="text/javascript" src="js/main-ui.js"></script>
+
+</body>
+</html>
